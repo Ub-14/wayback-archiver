@@ -297,11 +297,12 @@
           const timestamp = match[1];
           const status = match[2];
           const result = match[3];
+          const url = match[4];
           try {
-            const domain = new URL(match[4]).hostname;
+            const domain = new URL(url).hostname;
             return `[${timestamp}] ${status} ${result}: 🔗 ${domain}`;
           } catch (e) {
-            return `[${timestamp}] ${status} ${result}: 🔗 Website Auto Archiver`;
+            return `[${timestamp}] ${status} ${result}: 🔗 ${url}`;
           }
         }
         return line;
