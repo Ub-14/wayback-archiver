@@ -75,6 +75,10 @@
       transform: scale(1.05);
       background-color: #0069d9;
     }
+    .url-mask {
+      color: #555;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -95,10 +99,26 @@
 
       const res = await fetch('/archive');
       const text = await res.text();
-      document.getElementById('results').innerHTML = text.replaceAll('\n', '<br>');
+      const lines = text.split('\n');
+      const masked = lines.map(line => {
+        const match = line.match(/\[(.*?)\] (✅|❌) (Archived|Failed): (.+)/);
+        if (match) {
+          const timestamp = match[1];
+          const status = match[2];
+          const result = match[3];
+          try {
+            const domain = new URL(match[4]).hostname;
+            return `[${timestamp}] ${status} ${result}: 🔗 ${domain}`;
+          } catch (e) {
+            return `[${timestamp}] ${status} ${result}: 🔗 Website Auto Archiver`;
+          }
+        }
+        return line;
+      });
+      document.getElementById('results').innerHTML = masked.join('<br>');
 
       btn.disabled = false;
-      btn.innerHTML = '🚀 Start Archiving';
+      btn.innerHTML = '<span class="rocket-icon">🚀</span> Start Archiving';
     }
   </script>
 </body>
