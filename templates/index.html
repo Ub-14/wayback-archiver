@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Archiver</title>
+  <link rel="icon" href="https://img.icons8.com/ios/32/filing-cabinet.png" type="image/png">
+  <link rel="shortcut icon" href="https://img.icons8.com/ios/32/filing-cabinet.png" type="image/png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f0f4f8;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .archiver-container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 40px;
+      background-color: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #0056b3;
+    }
+    .results-box {
+      background-color: #f1f1f1;
+      padding: 20px;
+      border-radius: 8px;
+      font-family: monospace;
+      max-height: 400px;
+      overflow-y: auto;
+      margin-top: 30px;
+      border: 1px solid #ddd;
+    }
+    .spinner {
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 3px solid #fff;
+      border-top: 3px solid #007bff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-left: 10px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .btn-animate {
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+      padding: 12px 24px;
+      border-radius: 8px;
+    }
+    .btn-animate:hover {
+      transform: scale(1.05);
+      background-color: #0069d9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container archiver-container text-center">
+    <h1 class="mb-4">🌐 <span style="animation: pulse 2s infinite;">Website Auto Archiver</span></h1>
+    <p class="mb-4">Click the button below to archive important websites with one click.</p>
+    <button class="btn btn-primary btn-lg btn-animate" onclick="archiveWebsites()" id="archiveBtn">
+      🚀 Start Archiving 
+    </button>
+    <div id="results" class="results-box mt-4"></div>
+  </div>
+
+  <script>
+    async function archiveWebsites() {
+      const btn = document.getElementById("archiveBtn");
+      btn.disabled = true;
+      btn.innerHTML = '🌍 Archiving... <span class="spinner"></span>';
+
+      const res = await fetch('/archive');
+      const text = await res.text();
+      document.getElementById('results').innerHTML = text.replaceAll('\n', '<br>');
+
+      btn.disabled = false;
+      btn.innerHTML = '🚀 Start Archiving';
+    }
+  </script>
+</body>
+</html>
