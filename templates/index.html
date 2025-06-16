@@ -49,6 +49,14 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+    @keyframes rocketBounce {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+    .rocket-icon {
+      display: inline-block;
+      animation: rocketBounce 1.5s ease-in-out infinite;
+    }
     .btn-animate {
       transition: all 0.3s ease;
       font-size: 1.2rem;
@@ -66,7 +74,7 @@
     <h1 class="mb-4">🌐 <span style="animation: pulse 2s infinite;">Website Auto Archiver</span></h1>
     <p class="mb-4">Click the button below to archive important websites with one click.</p>
     <button class="btn btn-primary btn-lg btn-animate" onclick="archiveWebsites()" id="archiveBtn">
-      🚀 Start Archiving 
+      <span class="rocket-icon">🚀</span> Start Archiving 
     </button>
     <div id="results" class="results-box mt-4"></div>
   </div>
