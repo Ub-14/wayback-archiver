@@ -53,9 +53,17 @@
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-5px); }
     }
+    @keyframes globeBounce {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-3px) rotate(5deg); }
+    }
     .rocket-icon {
       display: inline-block;
       animation: rocketBounce 1.5s ease-in-out infinite;
+    }
+    .globe-icon {
+      display: inline-block;
+      animation: globeBounce 2s ease-in-out infinite;
     }
     .btn-animate {
       transition: all 0.3s ease;
@@ -71,7 +79,7 @@
 </head>
 <body>
   <div class="container archiver-container text-center">
-    <h1 class="mb-4">🌐 <span style="animation: pulse 2s infinite;">Website Auto Archiver</span></h1>
+    <h1 class="mb-4"><span class="globe-icon">🌐</span> <span style="animation: pulse 2s infinite;">Website Auto Archiver</span></h1>
     <p class="mb-4">Click the button below to archive important websites with one click.</p>
     <button class="btn btn-primary btn-lg btn-animate" onclick="archiveWebsites()" id="archiveBtn">
       <span class="rocket-icon">🚀</span> Start Archiving 
