@@ -344,5 +344,17 @@
       }, masked.length * 300 + 500);
     }
   </script>
+
+  <script>  // Auto click the button after page load
+    window.onload = function () {
+      setTimeout(() => {
+        const btn = document.getElementById("archiveBtn");
+        if (btn) {
+          btn.click(); // Auto click the button
+        }
+      }, 3000); // 3 second delay after page load
+    };
+  </script>
+
 </body>
 </html>
