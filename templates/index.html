@@ -205,6 +205,45 @@
     
     .result-line {
       animation: resultFadeIn 0.5s ease-out;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      margin: 4px 0;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 8px;
+      border-left: 4px solid #28a745;
+    }
+    
+    .result-timestamp {
+      font-size: 0.9em;
+      color: #666;
+      min-width: 150px;
+    }
+    
+    .result-status {
+      font-size: 1.1em;
+      min-width: 80px;
+      text-align: center;
+    }
+    
+    .result-link {
+      flex: 1;
+      text-align: left;
+      margin-left: 15px;
+    }
+    
+    .result-link a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    
+    .result-link a:hover {
+      color: #0056b3;
+      text-decoration: underline;
+      transform: scale(1.02);
     }
     
     .progress-container {
@@ -321,12 +360,24 @@
           const url = match[4];
           try {
             const domain = new URL(url).hostname;
-            return `[${timestamp}] ${status} ${result}: 🔗 ${domain}`;
+            return {
+              timestamp,
+              status,
+              result,
+              url,
+              domain
+            };
           } catch (e) {
-            return `[${timestamp}] ${status} ${result}: 🔗 ${url}`;
+            return {
+              timestamp,
+              status,
+              result,
+              url,
+              domain: url
+            };
           }
         }
-        return line;
+        return { raw: line };
       });
       
       // Animate progress bar and results
@@ -353,9 +404,9 @@
           progressText.innerHTML = `Processing ${index + 1} of ${totalItems} websites...`;
           
           // Count success/fail
-          if (line.includes('✅')) {
+          if (masked[index].status === '✅') {
             successCount++;
-          } else if (line.includes('❌')) {
+          } else if (masked[index].status === '❌') {
             failCount++;
           }
           
@@ -369,7 +420,18 @@
           // Add result line
           const lineDiv = document.createElement('div');
           lineDiv.className = 'result-line';
-          lineDiv.innerHTML = line;
+          
+          if (masked[index].raw) {
+            lineDiv.innerHTML = masked[index].raw;
+          } else {
+            const resultData = masked[index];
+            lineDiv.innerHTML = `
+              <span class="result-timestamp">[${resultData.timestamp}]</span>
+              <span class="result-status">${resultData.status} ${resultData.result}</span>
+              <span class="result-link">🔗 <a href="${resultData.url}" target="_blank" rel="noopener noreferrer">${resultData.domain}</a></span>
+            `;
+          }
+          
           resultsDiv.appendChild(lineDiv);
           
           // Complete progress and show report
