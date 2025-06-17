@@ -1,13 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Website Auto Archiver</title>
+  
+  <!-- Favicon icons for browser tab -->
   <link rel="icon" href="https://img.icons8.com/ios/32/filing-cabinet.png" type="image/png">
   <link rel="shortcut icon" href="https://img.icons8.com/ios/32/filing-cabinet.png" type="image/png">
+  
+  <!-- Bootstrap CSS for responsive design and components -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
   <style>
+    /* Main body styling with animated gradient background */
     body {
       background: linear-gradient(-45deg, #f0f4f8, #e3f2fd, #f3e5f5, #fff3e0);
       background-size: 400% 400%;
@@ -16,12 +23,14 @@
       min-height: 100vh;
     }
     
+    /* Keyframe animation for shifting gradient background */
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
     
+    /* Animation for elements entering from bottom */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -33,6 +42,7 @@
       }
     }
     
+    /* Animation for scaling elements in */
     @keyframes scaleIn {
       from {
         opacity: 0;
@@ -44,6 +54,7 @@
       }
     }
     
+    /* Floating box shadow animation for main container */
     @keyframes floatingBoxShadow {
       0%, 100% {
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -55,17 +66,19 @@
       }
     }
     
+    /* Main container styling with glassmorphism effect */
     .archiver-container {
       max-width: 800px;
       margin: 50px auto;
       padding: 40px;
       background-color: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px); /* Glassmorphism effect */
       border-radius: 18px;
       animation: scaleIn 0.8s ease-out, floatingBoxShadow 4s ease-in-out infinite;
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
+    /* Main heading styling */
     h1 {
       font-size: 2.5rem;
       font-weight: 700;
@@ -73,23 +86,26 @@
       animation: fadeInUp 1s ease-out 0.2s both;
     }
     
+    /* Paragraph styling */
     p {
       animation: fadeInUp 1s ease-out 0.4s both;
     }
     
+    /* Results display box styling */
     .results-box {
       background: linear-gradient(135deg, #f1f1f1, #e8e8e8);
       padding: 20px;
       border-radius: 12px;
       font-family: monospace;
       max-height: 400px;
-      overflow-y: auto;
+      overflow-y: auto; /* Scrollable if content overflows */
       margin-top: 30px;
       border: 1px solid #ddd;
       animation: fadeInUp 1s ease-out 0.8s both;
       box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     
+    /* Loading spinner animation */
     .spinner {
       display: inline-block;
       width: 1.5rem;
@@ -101,21 +117,25 @@
       margin-left: 10px;
     }
     
+    /* Spinner rotation animation */
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
     
+    /* Rocket icon bouncing animation */
     @keyframes rocketBounce {
       0%, 100% { transform: translateY(0px) rotate(-5deg); }
       50% { transform: translateY(-8px) rotate(5deg); }
     }
     
+    /* Globe icon bouncing animation */
     @keyframes globeBounce {
       0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
       50% { transform: translateY(-3px) rotate(10deg) scale(1.1); }
     }
     
+    /* Glowing text effect animation */
     @keyframes pulseGlow {
       0%, 100% {
         text-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
@@ -127,6 +147,7 @@
       }
     }
     
+    /* Button hover animation */
     @keyframes buttonHover {
       0% { transform: scale(1) rotateZ(0deg); }
       25% { transform: scale(1.05) rotateZ(1deg); }
@@ -134,18 +155,21 @@
       100% { transform: scale(1.1) rotateZ(0deg); }
     }
     
+    /* Rocket icon styling with animation */
     .rocket-icon {
       display: inline-block;
       animation: rocketBounce 2s ease-in-out infinite;
       filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
     }
     
+    /* Globe icon styling with animation */
     .globe-icon {
       display: inline-block;
       animation: globeBounce 3s ease-in-out infinite;
       filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
     }
     
+    /* Animated button styling */
     .btn-animate {
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       font-size: 1.2rem;
@@ -158,6 +182,7 @@
       overflow: hidden;
     }
     
+    /* Shimmer effect for button */
     .btn-animate::before {
       content: '';
       position: absolute;
@@ -169,6 +194,7 @@
       transition: left 0.5s;
     }
     
+    /* Button hover effects */
     .btn-animate:hover::before {
       left: 100%;
     }
@@ -183,15 +209,18 @@
       transform: scale(0.95);
     }
     
+    /* URL masking style */
     .url-mask {
       color: #555;
       font-style: italic;
     }
     
+    /* Glowing text effect */
     .text-glow {
       animation: pulseGlow 3s ease-in-out infinite;
     }
     
+    /* Result line fade-in animation */
     @keyframes resultFadeIn {
       from {
         opacity: 0;
@@ -203,6 +232,7 @@
       }
     }
     
+    /* Individual result line styling */
     .result-line {
       animation: resultFadeIn 0.5s ease-out;
       display: flex;
@@ -212,27 +242,31 @@
       margin: 4px 0;
       background: rgba(255, 255, 255, 0.7);
       border-radius: 8px;
-      border-left: 4px solid #28a745;
+      border-left: 4px solid #28a745; /* Green left border for success */
     }
     
+    /* Timestamp column in result line */
     .result-timestamp {
       font-size: 0.9em;
       color: #666;
       min-width: 150px;
     }
     
+    /* Status column in result line */
     .result-status {
       font-size: 1.1em;
       min-width: 80px;
       text-align: center;
     }
     
+    /* Link column in result line */
     .result-link {
       flex: 1;
       text-align: left;
       margin-left: 15px;
     }
     
+    /* Clickable link styling */
     .result-link a {
       color: #007bff;
       text-decoration: none;
@@ -240,12 +274,14 @@
       transition: all 0.2s ease;
     }
     
+    /* Link hover effects */
     .result-link a:hover {
       color: #0056b3;
       text-decoration: underline;
       transform: scale(1.02);
     }
     
+    /* Progress bar container */
     .progress-container {
       width: 100%;
       height: 8px;
@@ -259,11 +295,13 @@
       transition: all 0.3s ease;
     }
     
+    /* Show progress bar when active */
     .progress-container.show {
       opacity: 1;
       transform: scaleX(1);
     }
     
+    /* Animated progress bar */
     .progress-bar {
       height: 100%;
       background: linear-gradient(45deg, #007bff, #0056b3, #28a745);
@@ -275,11 +313,13 @@
       position: relative;
     }
     
+    /* Progress bar shimmer effect */
     @keyframes progressShimmer {
       0% { background-position: 200% 0; }
       100% { background-position: -200% 0; }
     }
     
+    /* Progress text styling */
     .progress-text {
       text-align: center;
       margin-top: 10px;
@@ -289,24 +329,35 @@
       transition: opacity 0.3s ease;
     }
     
+    /* Show progress text when active */
     .progress-text.show {
       opacity: 1;
     }
   </style>
 </head>
 <body>
+  <!-- Main application container -->
   <div class="container archiver-container text-center">
+    <!-- Page title with animated icons -->
     <h1 class="mb-4"><span class="globe-icon">🌐</span> <span class="text-glow">Website Auto Archiver</span></h1>
+    
+    <!-- Description text -->
     <p class="mb-4">Click the button below to archive important websites with one click.</p>
+    
+    <!-- Main action button -->
     <button class="btn btn-primary btn-lg btn-animate" onclick="archiveWebsites()" id="archiveBtn">
       <span class="rocket-icon">🚀</span> Start Archiving 
     </button>
+    
+    <!-- Progress bar container (hidden initially) -->
     <div class="progress-container" id="progressContainer">
       <div class="progress-bar" id="progressBar"></div>
     </div>
+    
+    <!-- Progress text (hidden initially) -->
     <div class="progress-text" id="progressText"></div>
     
-    <!-- Report Summary Section -->
+    <!-- Report Summary Section (hidden initially) -->
     <div id="reportSummary" class="alert alert-info mt-4" style="display: none;">
       <h5><strong>📊 Archiving Report Summary</strong></h5>
       <div class="row text-center">
@@ -320,151 +371,180 @@
           <h6 class="text-danger">❌ Failed: <span id="failCount">0</span></h6>
         </div>
       </div>
+      <!-- Success rate progress bar -->
       <div class="progress mt-2">
         <div class="progress-bar bg-success" id="successRate" style="width: 0%"></div>
       </div>
       <small class="text-muted">Success Rate: <span id="successPercentage">0%</span></small>
     </div>
     
+    <!-- Results display area -->
     <div id="results" class="results-box mt-4"></div>
   </div>
 </body>
 
-  <script>
-    async function archiveWebsites() {
-      const btn = document.getElementById("archiveBtn");
-      const progressContainer = document.getElementById("progressContainer");
-      const progressBar = document.getElementById("progressBar");
-      const progressText = document.getElementById("progressText");
-      const resultsDiv = document.getElementById('results');
-      
-      btn.disabled = true;
-      btn.innerHTML = '🌍 Archiving... <span class="spinner"></span>';
-      
-      // Show progress bar
-      progressContainer.classList.add('show');
-      progressText.classList.add('show');
-      progressText.innerHTML = 'Initializing archiving process...';
-      resultsDiv.innerHTML = '';
+<script>
+  /**
+   * Main function to handle website archiving process
+   * Fetches data from Flask backend and displays results with animations
+   */
+  async function archiveWebsites() {
+    // Get DOM elements for manipulation
+    const btn = document.getElementById("archiveBtn");
+    const progressContainer = document.getElementById("progressContainer");
+    const progressBar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
+    const resultsDiv = document.getElementById('results');
+    
+    // Disable button and show loading state
+    btn.disabled = true;
+    btn.innerHTML = '🌍 Archiving... <span class="spinner"></span>';
+    
+    // Show progress bar and initialize UI
+    progressContainer.classList.add('show');
+    progressText.classList.add('show');
+    progressText.innerHTML = 'Initializing archiving process...';
+    resultsDiv.innerHTML = ''; // Clear previous results
 
-      const res = await fetch('/archive');
-      const text = await res.text();
-      const lines = text.split('\n').filter(line => line.trim());
-      
-      const masked = lines.map(line => {
-        const match = line.match(/\[(.*?)\] (✅|❌) (Archived|Failed): (.+)/);
-        if (match) {
-          const timestamp = match[1];
-          const status = match[2];
-          const result = match[3];
-          const url = match[4];
-          try {
-            const domain = new URL(url).hostname;
-            return {
-              timestamp,
-              status,
-              result,
-              url,
-              domain
-            };
-          } catch (e) {
-            return {
-              timestamp,
-              status,
-              result,
-              url,
-              domain: url
-            };
-          }
+    // Fetch archiving results from Flask backend
+    const res = await fetch('/archive');
+    const text = await res.text();
+    
+    // Parse response into individual lines (removing empty lines)
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    // Parse each line to extract structured data
+    const masked = lines.map(line => {
+      // Regular expression to parse timestamp, status, result type, and URL
+      const match = line.match(/\[(.*?)\] (✅|❌) (Archived|Failed): (.+)/);
+      if (match) {
+        const timestamp = match[1];
+        const status = match[2];     // ✅ or ❌
+        const result = match[3];     // "Archived" or "Failed"
+        const url = match[4];        // The website URL
+        
+        try {
+          // Extract domain name from full URL for display
+          const domain = new URL(url).hostname;
+          return {
+            timestamp,
+            status,
+            result,
+            url,
+            domain
+          };
+        } catch (e) {
+          // Fallback if URL parsing fails
+          return {
+            timestamp,
+            status,
+            result,
+            url,
+            domain: url
+          };
         }
-        return { raw: line };
-      });
-      
-      // Animate progress bar and results
-      let currentProgress = 0;
-      const totalItems = masked.length;
-      let successCount = 0;
-      let failCount = 0;
-      
-      // Show report summary
-      const reportSummary = document.getElementById('reportSummary');
-      const totalCountSpan = document.getElementById('totalCount');
-      const successCountSpan = document.getElementById('successCount');
-      const failCountSpan = document.getElementById('failCount');
-      const successRateBar = document.getElementById('successRate');
-      const successPercentageSpan = document.getElementById('successPercentage');
-      
-      totalCountSpan.textContent = totalItems;
-      
-      masked.forEach((line, index) => {
-        setTimeout(() => {
-          // Update progress
-          currentProgress = ((index + 1) / totalItems) * 100;
-          progressBar.style.width = currentProgress + '%';
-          progressText.innerHTML = `Processing ${index + 1} of ${totalItems} websites...`;
-          
-          // Count success/fail
-          if (masked[index].status === '✅') {
-            successCount++;
-          } else if (masked[index].status === '❌') {
-            failCount++;
-          }
-          
-          // Update report summary
-          successCountSpan.textContent = successCount;
-          failCountSpan.textContent = failCount;
-          const successRate = totalItems > 0 ? (successCount / totalItems) * 100 : 0;
-          successRateBar.style.width = successRate + '%';
-          successPercentageSpan.textContent = successRate.toFixed(1) + '%';
-          
-          // Add result line
-          const lineDiv = document.createElement('div');
-          lineDiv.className = 'result-line';
-          
-          if (masked[index].raw) {
-            lineDiv.innerHTML = masked[index].raw;
-          } else {
-            const resultData = masked[index];
-            lineDiv.innerHTML = `
-              <span class="result-timestamp">[${resultData.timestamp}]</span>
-              <span class="result-status">${resultData.status} ${resultData.result}</span>
-              <span class="result-link">🔗 <a href="${resultData.url}" target="_blank" rel="noopener noreferrer">${resultData.domain}</a></span>
-            `;
-          }
-          
-          resultsDiv.appendChild(lineDiv);
-          
-          // Complete progress and show report
-          if (index === totalItems - 1) {
+      }
+      // Return raw line if it doesn't match expected format
+      return { raw: line };
+    });
+    
+    // Initialize counters and UI elements for progress tracking
+    let currentProgress = 0;
+    const totalItems = masked.length;
+    let successCount = 0;
+    let failCount = 0;
+    
+    // Get report summary DOM elements
+    const reportSummary = document.getElementById('reportSummary');
+    const totalCountSpan = document.getElementById('totalCount');
+    const successCountSpan = document.getElementById('successCount');
+    const failCountSpan = document.getElementById('failCount');
+    const successRateBar = document.getElementById('successRate');
+    const successPercentageSpan = document.getElementById('successPercentage');
+    
+    // Set total count in report
+    totalCountSpan.textContent = totalItems;
+    
+    // Animate results display with staggered timing
+    masked.forEach((line, index) => {
+      setTimeout(() => {
+        // Update progress bar
+        currentProgress = ((index + 1) / totalItems) * 100;
+        progressBar.style.width = currentProgress + '%';
+        progressText.innerHTML = `Processing ${index + 1} of ${totalItems} websites...`;
+        
+        // Count successes and failures for statistics
+        if (masked[index].status === '✅') {
+          successCount++;
+        } else if (masked[index].status === '❌') {
+          failCount++;
+        }
+        
+        // Update report summary with current statistics
+        successCountSpan.textContent = successCount;
+        failCountSpan.textContent = failCount;
+        const successRate = totalItems > 0 ? (successCount / totalItems) * 100 : 0;
+        successRateBar.style.width = successRate + '%';
+        successPercentageSpan.textContent = successRate.toFixed(1) + '%';
+        
+        // Create and display result line
+        const lineDiv = document.createElement('div');
+        lineDiv.className = 'result-line';
+        
+        if (masked[index].raw) {
+          // Display raw line if parsing failed
+          lineDiv.innerHTML = masked[index].raw;
+        } else {
+          // Create structured HTML for parsed data
+          const resultData = masked[index];
+          lineDiv.innerHTML = `
+            <span class="result-timestamp">[${resultData.timestamp}]</span>
+            <span class="result-status">${resultData.status} ${resultData.result}</span>
+            <span class="result-link">🔗 <a href="${resultData.url}" target="_blank" rel="noopener noreferrer">${resultData.domain}</a></span>
+          `;
+        }
+        
+        // Add the result line to the display
+        resultsDiv.appendChild(lineDiv);
+        
+        // Handle completion of all items
+        if (index === totalItems - 1) {
+          setTimeout(() => {
+            progressText.innerHTML = '✅ All websites archived successfully!';
+            reportSummary.style.display = 'block'; // Show final report
+            
+            // Hide progress bar after delay
             setTimeout(() => {
-              progressText.innerHTML = '✅ All websites archived successfully!';
-              reportSummary.style.display = 'block';
-              setTimeout(() => {
-                progressContainer.classList.remove('show');
-                progressText.classList.remove('show');
-              }, 2000);
-            }, 300);
-          }
-        }, index * 300);
-      });
-
-      btn.disabled = false;
-      setTimeout(() => {
-        btn.innerHTML = '<span class="rocket-icon">🚀</span> Start Archiving';
-      }, masked.length * 300 + 500);
-    }
-  </script>
-
-  <script>  // Auto click the button after page load
-    window.onload = function () {
-      setTimeout(() => {
-        const btn = document.getElementById("archiveBtn");
-        if (btn) {
-          btn.click(); // Auto click the button
+              progressContainer.classList.remove('show');
+              progressText.classList.remove('show');
+            }, 2000);
+          }, 300);
         }
-      }, 3000); // 3 second delay after page load
-    };
-  </script>
+      }, index * 300); // Stagger each result by 300ms
+    });
+
+    // Re-enable button after all animations complete
+    btn.disabled = false;
+    setTimeout(() => {
+      btn.innerHTML = '<span class="rocket-icon">🚀</span> Start Archiving';
+    }, masked.length * 300 + 500);
+  }
+</script>
+
+<script>
+  /**
+   * Auto-start functionality - automatically clicks archive button after page load
+   * Provides 3-second delay to allow animations to complete
+   */
+  window.onload = function () {
+    setTimeout(() => {
+      const btn = document.getElementById("archiveBtn");
+      if (btn) {
+        btn.click(); // Automatically trigger archiving process
+      }
+    }, 3000); // 3 second delay after page load
+  };
+</script>
 
 </body>
 </html>
