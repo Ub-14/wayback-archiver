@@ -29,7 +29,7 @@ def home():
 @app.route('/archive')
 def archive():
     results = [archive_url(url) for url in websites_to_archive]
-    return "<br>".join(results)
+    return "\n".join(results)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
