@@ -266,6 +266,27 @@
       <div class="progress-bar" id="progressBar"></div>
     </div>
     <div class="progress-text" id="progressText"></div>
+    
+    <!-- Report Summary Section -->
+    <div id="reportSummary" class="alert alert-info mt-4" style="display: none;">
+      <h5><strong>📊 Archiving Report Summary</strong></h5>
+      <div class="row text-center">
+        <div class="col-md-4">
+          <h6>Total Websites: <span id="totalCount">0</span></h6>
+        </div>
+        <div class="col-md-4">
+          <h6 class="text-success">✅ Successful: <span id="successCount">0</span></h6>
+        </div>
+        <div class="col-md-4">
+          <h6 class="text-danger">❌ Failed: <span id="failCount">0</span></h6>
+        </div>
+      </div>
+      <div class="progress mt-2">
+        <div class="progress-bar bg-success" id="successRate" style="width: 0%"></div>
+      </div>
+      <small class="text-muted">Success Rate: <span id="successPercentage">0%</span></small>
+    </div>
+    
     <div id="results" class="results-box mt-4"></div>
   </div>
 </body>
@@ -311,6 +332,18 @@
       // Animate progress bar and results
       let currentProgress = 0;
       const totalItems = masked.length;
+      let successCount = 0;
+      let failCount = 0;
+      
+      // Show report summary
+      const reportSummary = document.getElementById('reportSummary');
+      const totalCountSpan = document.getElementById('totalCount');
+      const successCountSpan = document.getElementById('successCount');
+      const failCountSpan = document.getElementById('failCount');
+      const successRateBar = document.getElementById('successRate');
+      const successPercentageSpan = document.getElementById('successPercentage');
+      
+      totalCountSpan.textContent = totalItems;
       
       masked.forEach((line, index) => {
         setTimeout(() => {
@@ -319,16 +352,31 @@
           progressBar.style.width = currentProgress + '%';
           progressText.innerHTML = `Processing ${index + 1} of ${totalItems} websites...`;
           
+          // Count success/fail
+          if (line.includes('✅')) {
+            successCount++;
+          } else if (line.includes('❌')) {
+            failCount++;
+          }
+          
+          // Update report summary
+          successCountSpan.textContent = successCount;
+          failCountSpan.textContent = failCount;
+          const successRate = totalItems > 0 ? (successCount / totalItems) * 100 : 0;
+          successRateBar.style.width = successRate + '%';
+          successPercentageSpan.textContent = successRate.toFixed(1) + '%';
+          
           // Add result line
           const lineDiv = document.createElement('div');
           lineDiv.className = 'result-line';
           lineDiv.innerHTML = line;
           resultsDiv.appendChild(lineDiv);
           
-          // Complete progress
+          // Complete progress and show report
           if (index === totalItems - 1) {
             setTimeout(() => {
               progressText.innerHTML = '✅ All websites archived successfully!';
+              reportSummary.style.display = 'block';
               setTimeout(() => {
                 progressContainer.classList.remove('show');
                 progressText.classList.remove('show');
