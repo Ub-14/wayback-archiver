@@ -1,74 +1,73 @@
-
 # Import necessary libraries
-from flask import Flask, render_template  # Flask for web framework, render_template for HTML rendering
-import requests  # For making HTTP requests to the Web Archive API
-from datetime import datetime  # For timestamp formatting
+from flask import Flask, render_template
+import requests
+from datetime import datetime
+import pytz  # For Pakistan timezone
+import time  # For delay
+import os  # To check/create log file
+
+# Terminal colors
+GREEN = "\033[92m"
+RED = "\033[91m"
+RESET = "\033[0m"
 
 # Initialize Flask application
 app = Flask(__name__)
 
-# List of websites to archive automatically
-# These URLs will be sent to the Wayback Machine for archiving
+# Websites to archive
 websites_to_archive = [
-    "https://www.akhuwat.org.pk",
-    "https://akhuwat.edu.pk",
-    "https://donate.akhuwat.org.pk",
-    "https://ahfcl.org.pk",
-    "https://amjadsaqib.com",
-    "https://akhuwatislamicmicrofinance.org.pk"
+    "https://akhuwat.org.pk", "https://akhuwat.edu.pk",
+    "https://donate.akhuwat.org.pk", "https://ahfcl.org.pk",
+    "https://amjadsaqib.com", "https://akhuwatislamicmicrofinance.org.pk"
 ]
+
+# Log file path
+log_file = "archive_log.txt"
 
 def archive_url(url):
     """
     Archive a single URL using the Wayback Machine Save API
-    
-    Args:
-        url (str): The URL to archive
-        
-    Returns:
-        str: A formatted message indicating success or failure with timestamp
+    and log result to console and file
     """
-    # Construct the Wayback Machine save URL
     save_url = f"https://web.archive.org/save/{url}"
-    
-    # Make HTTP GET request to archive the URL
-    response = requests.get(save_url)
-    
-    # Get current timestamp for logging
-    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    
-    # Check if the archiving was successful (HTTP 200 status)
-    if response.status_code == 200:
-        return f"[{now}] ✅ Archived: {url}"
-    else:
-        return f"[{now}] ❌ Failed: {url} (Status: {response.status_code})"
+    headers = {"User-Agent": "Mozilla/5.0 (WaybackArchiverBot)"}
+    now = datetime.now(pytz.timezone('Asia/Karachi')).strftime("%Y-%m-%d %H:%M:%S")
+
+    try:
+        response = requests.get(save_url, headers=headers)
+
+        if response.status_code == 200:
+            msg = f"[{now}] ✅ Archived: {url}"
+            print(f"{GREEN}{msg}{RESET}")
+        else:
+            msg = f"[{now}] ❌ Failed: {url} (Status: {response.status_code})"
+            print(f"{RED}{msg}{RESET}")
+
+    except Exception as e:
+        msg = f"[{now}] ❌ Error: {url} ({str(e)})"
+        print(f"{RED}{msg}{RESET}")
+
+    # Save message to log file
+    with open(log_file, "a") as f:
+        f.write(msg + "\n")
+
+    return msg
+
 
 @app.route('/')
 def home():
-    """
-    Route handler for the home page
-    Renders the main HTML template with the user interface
-    """
-    return render_template('index.html')  # Load the frontend HTML file
+    return render_template('index.html')
+
 
 @app.route('/archive')
 def archive():
-    """
-    Route handler for the archiving endpoint
-    Processes all websites in the list and returns results
-    
-    Returns:
-        str: Newline-separated results of archiving attempts
-    """
-    # Archive each URL in the list and collect results
-    results = [archive_url(url) for url in websites_to_archive]
-    
-    # Return results separated by newlines (not HTML breaks)
-    # This allows proper parsing by the frontend JavaScript
+    results = []
+    for url in websites_to_archive:
+        result = archive_url(url)
+        results.append(result)
+        time.sleep(2)  # Delay between requests
     return "\n".join(results)
 
-# Start the Flask application
-# host='0.0.0.0' makes it accessible from outside the container
-# port=8080 is the designated port for this Replit application
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
