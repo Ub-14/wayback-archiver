@@ -20,6 +20,7 @@ websites_to_archive = [
     "https://akhuwat.org.pk", "https://akhuwat.edu.pk",
     "https://donate.akhuwat.org.pk", "https://ahfcl.org.pk",
     "https://amjadsaqib.com", "https://akhuwatislamicmicrofinance.org.pk"
+    "https://freelancers.akhuwat.edu.pk/"
 ]
 
 # Log file path
