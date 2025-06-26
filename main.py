@@ -17,10 +17,13 @@ app = Flask(__name__)
 
 # Websites to archive
 websites_to_archive = [
-    "https://akhuwat.org.pk", "https://akhuwat.edu.pk",
-    "https://donate.akhuwat.org.pk", "https://ahfcl.org.pk",
-    "https://amjadsaqib.com", "https://akhuwatislamicmicrofinance.org.pk"
-    "https://freelancers.akhuwat.edu.pk/"
+    "https://akhuwat.org.pk", 
+    "https://akhuwat.edu.pk",
+    "https://donate.akhuwat.org.pk", 
+    "https://ahfcl.org.pk",
+    "https://amjadsaqib.com", 
+    "https://akhuwatislamicmicrofinance.org.pk",
+    "https://freelancers.akhuwat.edu.pk"
 ]
 
 # Log file path
