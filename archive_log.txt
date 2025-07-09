@@ -102,3 +102,24 @@
 [2025-06-26 12:23:51] ❌ Failed: https://amjadsaqib.com (Status: 429)
 [2025-06-26 12:23:55] ✅ Archived: https://akhuwatislamicmicrofinance.org.pk
 [2025-06-26 12:24:06] ✅ Archived: https://freelancers.akhuwat.edu.pk
+[2025-06-26 13:01:43] ❌ Failed: https://akhuwat.org.pk (Status: 429)
+[2025-06-26 13:01:45] ❌ Failed: https://akhuwat.edu.pk (Status: 429)
+[2025-06-26 13:01:47] ❌ Failed: https://donate.akhuwat.org.pk (Status: 429)
+[2025-06-26 13:01:49] ❌ Failed: https://ahfcl.org.pk (Status: 429)
+[2025-06-26 13:01:51] ❌ Failed: https://amjadsaqib.com (Status: 429)
+[2025-06-26 13:01:53] ✅ Archived: https://akhuwatislamicmicrofinance.org.pk
+[2025-06-26 13:02:02] ✅ Archived: https://freelancers.akhuwat.edu.pk
+[2025-07-09 16:12:07] ❌ Failed: https://akhuwat.org.pk (Status: 429)
+[2025-07-09 16:12:11] ❌ Failed: https://akhuwat.edu.pk (Status: 429)
+[2025-07-09 16:12:15] ❌ Failed: https://donate.akhuwat.org.pk (Status: 429)
+[2025-07-09 16:12:18] ❌ Failed: https://ahfcl.org.pk (Status: 429)
+[2025-07-09 16:12:22] ❌ Failed: https://amjadsaqib.com (Status: 429)
+[2025-07-09 16:12:26] ❌ Failed: https://akhuwatislamicmicrofinance.org.pk (Status: 429)
+[2025-07-09 16:12:29] ❌ Failed: https://freelancers.akhuwat.edu.pk (Status: 429)
+[2025-07-09 16:12:48] ❌ Failed: https://akhuwat.org.pk (Status: 429)
+[2025-07-09 16:12:52] ❌ Failed: https://akhuwat.edu.pk (Status: 429)
+[2025-07-09 16:12:55] ❌ Failed: https://donate.akhuwat.org.pk (Status: 429)
+[2025-07-09 16:12:59] ❌ Failed: https://ahfcl.org.pk (Status: 429)
+[2025-07-09 16:13:03] ❌ Failed: https://amjadsaqib.com (Status: 429)
+[2025-07-09 16:13:06] ❌ Failed: https://akhuwatislamicmicrofinance.org.pk (Status: 429)
+[2025-07-09 16:13:10] ❌ Failed: https://freelancers.akhuwat.edu.pk (Status: 429)
